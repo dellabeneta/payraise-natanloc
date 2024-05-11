@@ -12,11 +12,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "payrayse.dellabeneta.online"
+  bucket        = "raise.dellabeneta.online"
   force_destroy = true
 
   tags = {
-    Name        = "PayRayse"
+    Name        = "raise"
     Environment = "Dev"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_s3_bucket_public_access_block" "access_block" {
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = "payrayse.dellabeneta.online"
+  bucket = "raise.dellabeneta.online"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -69,7 +69,7 @@ module "template_files" {
 
 resource "aws_s3_object" "objects" {
     for_each                = "${module.template_files.files}"
-    bucket                  = "payrayse.dellabeneta.online"
+    bucket                  = "raise.dellabeneta.online"
     key                     = each.key
     content_type            = each.value.content_type
     source                  = each.value.source_path
